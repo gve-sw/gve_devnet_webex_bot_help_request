@@ -1,6 +1,15 @@
 # Request Help Bot
 
-This prototype defines a Webex bot that a user can use to create a help request addressable by members of a specific Webex Team's Space. Once the request is accepted, a 1-1 space between the requester and accepter is created. The bot uses Webex APIs, the webex_bot Python library, and Webex Cards. Custom cards can be used (Note: the default cards target a Radiologist and Physician Assistant use case).
+This prototype leverages a Webex bot to create a help request addressable by members of a different Webex Team's Space. Once the request is accepted, a 1-1 space between the requester and accepter is created. The bot uses Webex APIs, the webex_bot Python library, and Webex Cards. 
+
+**Note**: Custom cards can be used but the default cards target a Radiologist and Physician Assistant use case.
+
+A typical bot workflow:
+* Requester creates a 1-1 (or Group Space) with the bot
+* Requester requests help from the bot
+* A Webex Card is submitted with Help Request details to a designated "Help Space" (Requester is typically not part of this space)
+* A "Help Request" is accepted
+* A 1-1 space with the Requester and Accepter is created
 
 ## Contacts
 * Trevor Maco
@@ -20,7 +29,7 @@ This prototype defines a Webex bot that a user can use to create a help request 
 6. Once the form is filled out, click `Add Bot` and you will be given an access token
 7. Copy the access token and store it safely. Please note that the API key will be shown only once for security purposes. In case you lose the key, then you have to revoke the key and generate a new key
 
-- **Help Space**: Ensure a Webex Teams space that will receive the help requests exists. The space name as well as the members of the space are left up to you.
+- **Help Space**: Ensure a Webex Teams space that will receive the help requests exists **and** your bot is a part of that space. The space name as well as the members of the space are left up to you.
 
 ## Installation/Configuration
 1. Clone this repository with `git clone https://github.com/gve-sw/gve_devnet_webex_bot_help_request` and open the directory of the root repository.
@@ -31,26 +40,26 @@ This prototype defines a Webex bot that a user can use to create a help request 
    ```
 4. Fill in the `config.py` parameters. These include: Bot Token, Bot Name, and the name of the Webex Help Space.
     ``` python
-    BOT_TOKEN = '<bot token>'
-    BOT_NAME = '<bot name>'
-    HELP_SPACE = '<help space name>'
+    BOT_TOKEN = 'XXXXXXXX'
+    BOT_NAME = 'Sample Bot'
+    HELP_SPACE = 'Sample Help Space'
     ```
 
 ## Usage
 
-1. Launch the bot with the command:
+1. Launch your bot with the command:
     ``` python
     python3 bot.py
     ```
 
-To use the bot, start a conversation by adding the bot to a 1-1 or Group space.
+To use your bot, start a conversation by adding the bot to a 1-1 or Group space.
 
 Send the string `request`. Once the bot processes the message, it responds with a Webex card containing an optional field to specify details about the request.
 Click the `submit` button.
 
 ![/IMAGES/request_card](/IMAGES/request_card.png)
 
-Once submitted, the bot will delete the card and post the request into the specified Help Space using a Webex card. The request card includes the requester name, optional request details, and a unique id.
+Once submitted, your bot will delete the card and post the request into the specified Help Space using a Webex card. The request card includes the requester name, optional request details, and a unique id.
 To accept a request, click the `accept` button. 
 
 ![/IMAGES/accept_card](/IMAGES/accept_card.png)
